@@ -3,12 +3,29 @@ package controllers
 import play.api._
 import play.api.mvc._
 import play.api.libs.json._
+import play.api.db.DB
+import anorm._
+import play.api.Play.current
+import anorm.SqlParser._
 
 //import models.User
 
 /** Example controller; see conf/routes for the the mapping to routes */
 object Users extends Controller with Security {
 
+  /**
+   * Check if the supplied username and pass are OK, return user ID or nil
+   */
+  def login(email: String, password: String) {
+     DB.withConnection { implicit c =>
+
+      val id: Option[Long] = SQL("Select id from Users where upper(email) = upper({email}) and password = {pass}")
+      .on('email -> email, 'pass -> password).as(scalar[Long].singleOpt)
+
+      id
+     }
+  }
+  
   /** Retrieves the user for the given id as JSON */
   def user(id: Long) = Action(parse.empty) { request =>
     // TODO Find user and convert to JSON
