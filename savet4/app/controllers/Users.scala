@@ -21,7 +21,7 @@ object Users extends Controller with Security {
 
       val id: Option[Long] = SQL("Select id from Users where upper(email) = upper({email}) and password = {pass}")
       .on('email -> email, 'pass -> password).as(scalar[Long].singleOpt)
-
+println(id)
       id
      }
   }

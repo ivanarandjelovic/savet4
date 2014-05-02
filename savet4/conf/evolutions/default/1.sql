@@ -11,7 +11,7 @@ CREATE TABLE Users (
     PRIMARY KEY (id)
 );
 
-insert into Users(email, password, description,role) values ('ivan.arandjelovic@gmail.com','1','Bogotac','GOD');
+insert into Users(email, password, description,role) values ('a@a.a','1','Bogotac','GOD');
 
 # --- !Downs
  
