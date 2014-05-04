@@ -4,15 +4,22 @@ import play.api._
 import play.api.mvc._
 import play.api.libs.json._
 import play.api.libs.functional.syntax._
+import play.api.cache._
 
 /** Application controller, handles authentication */
 object Application extends Controller with Security {
 
-  
-   implicit val rds = (
-    (__ \ 'email).read[String] and (__ \ 'password).read[String]
-  ) tupled
-  
+  implicit val app: play.api.Application = play.api.Play.current
+
+  lazy val CacheExpiration =
+    app.configuration.getInt("cache.expiration").getOrElse(60 /*seconds*/ * 2 /* minutes */ )
+
+  val AuthTokenHeader = "X-XSRF-TOKEN"
+  val AuthTokenCookieKey = "XSRF-TOKEN"
+
+  implicit val rds = (
+    (__ \ 'email).read[String] and (__ \ 'password).read[String]) tupled
+
   /** Serves the index page, see views/index.scala.html */
   def index = Action {
     Ok(views.html.index())
@@ -30,39 +37,45 @@ object Application extends Controller with Security {
         routes.javascript.Users.user,
         routes.javascript.Users.createUser,
         routes.javascript.Users.updateUser,
-        routes.javascript.Users.deleteUser
-        // TODO Add your routes here
-      )
-    ).as(JAVASCRIPT)
+        routes.javascript.Users.deleteUser // TODO Add your routes here
+        )).as(JAVASCRIPT)
   }
 
-  
   /**
    * Log-in a user. Pass the credentials as JSON body.
    * @return The token needed for subsequent requests
    */
   def login() = Action(parse.json) { implicit request =>
     // TODO Check credentials, log user in, return correct token
-    
-    request.body.validate[(String, String)].map{ 
+
+    request.body.validate[(String, String)].map {
       case (email, pass) => {
         val id = Users.login(email, pass)
-        
+
         // TODO IvanA: continue
-        
         val token = java.util.UUID.randomUUID().toString
-        Ok(Json.obj("token" -> token))
+
+        Cache.set(token, id, CacheExpiration)
+
+        Ok(Json.obj("token" -> token)).withCookies(Cookie(AuthTokenCookieKey, token, None, httpOnly = false))
+
       }
-    }.recoverTotal{
-      e => BadRequest("Detected error:"+ JsError.toFlatJson(e))
+    }.recoverTotal {
+      e => BadRequest("Detected error:" + JsError.toFlatJson(e))
     }
-       
-    
+
   }
 
   /** Logs the user out, i.e. invalidated the token. */
-  def logout() = Action {
+  def logout() = Action { implicit request =>
     // TODO Invalidate token, remove cookie
+    request.headers.get(AuthTokenHeader) map { token =>
+      {
+        Cache.remove(token)
+        Redirect("/").discardingCookies(DiscardingCookie(name = AuthTokenCookieKey))
+      }
+    } getOrElse BadRequest(Json.obj("err" -> "No Token"))
+
     Ok
   }
 

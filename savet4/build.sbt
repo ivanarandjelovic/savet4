@@ -6,15 +6,16 @@ version := "2.2.2"
 
 libraryDependencies ++= Seq(
   // WebJars infrastructure
-  "org.webjars" % "webjars-locator" % "0.13",
-  "org.webjars" %% "webjars-play" % "2.2.1-2",
+  "org.webjars" % "webjars-locator" % "0.13"
+  ,"org.webjars" %% "webjars-play" % "2.2.1-2"
   // WebJars dependencies
-  "org.webjars" % "underscorejs" % "1.6.0-1",
-  "org.webjars" % "jquery" % "1.11.0-1",
-  "org.webjars" % "bootstrap" % "3.1.1" exclude("org.webjars", "jquery"),
-  "org.webjars" % "angularjs" % "1.2.14" exclude("org.webjars", "jquery"),
-  jdbc,      // The JDBC connection pool and the play.api.db API
-  anorm     // Scala RDBMS Library
+  ,"org.webjars" % "underscorejs" % "1.6.0-1"
+  ,"org.webjars" % "jquery" % "1.11.0-1"
+  ,"org.webjars" % "bootstrap" % "3.1.1" exclude("org.webjars", "jquery")
+  ,"org.webjars" % "angularjs" % "1.2.14" exclude("org.webjars", "jquery")
+  ,jdbc      // The JDBC connection pool and the play.api.db API
+  ,anorm     // Scala RDBMS Library
+  ,cache     // Play API cache
 )
 
 playScalaSettings
