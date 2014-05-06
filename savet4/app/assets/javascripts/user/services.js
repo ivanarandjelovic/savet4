@@ -29,8 +29,7 @@ define([ "angular", "common" ], function(angular) {
 					},
 					logout : function() {
 						// Logout on server in a real app
-						return playRoutes.controllers.Application.logout()
-								.then(function(response) {
+						return playRoutes.controllers.Application.logout().post().then(function(response) {
 									user = undefined;
 								});
 
