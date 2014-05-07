@@ -26,6 +26,15 @@ define(["angular"], function(angular) {
       $scope.user = undefined;
       $location.path("/");
     };
+    
+     $scope.home = function() {
+      if($scope.user === undefined) {
+      	$location.path("/");
+      } else {
+	      $location.path("/dashboard");
+      }
+    };
+    
   };
   HeaderCtrl.$inject = ["$scope", "userService", "helper", "$location"];
 
