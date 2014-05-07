@@ -22,6 +22,7 @@ object Application extends Controller with Security {
 
   /** Serves the index page, see views/index.scala.html */
   def index = Action {
+    print("Entering index action!")
     Ok(views.html.index())
   }
 
@@ -46,6 +47,7 @@ object Application extends Controller with Security {
    * @return The token needed for subsequent requests
    */
   def login() = Action(parse.json) { implicit request =>
+        
     // TODO Check credentials, log user in, return correct token
 
     request.body.validate[(String, String)].map {

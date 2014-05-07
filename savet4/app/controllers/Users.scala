@@ -17,15 +17,16 @@ object Users extends Controller with Security {
    * Check if the supplied username and pass are OK, return user ID or nil
    */
   def login(email: String, password: String) {
-     DB.withConnection { implicit c =>
+    DB.withConnection { implicit c =>
 
       val id: Option[Long] = SQL("Select id from Users where upper(email) = upper({email}) and password = {pass}")
-      .on('email -> email, 'pass -> password).as(scalar[Long].singleOpt)
-println(id)
-      id
-     }
+        .on('email -> email, 'pass -> password).as(scalar[Long].singleOpt)
+      if (id == None) {
+        throw new Exception();
+      } else id
+    }
   }
-  
+
   /** Retrieves the user for the given id as JSON */
   def user(id: Long) = Action(parse.empty) { request =>
     // TODO Find user and convert to JSON
