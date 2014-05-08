@@ -6,10 +6,17 @@ define(["angular"], function(angular) {
 
   var LoginCtrl = function($scope, $location, userService) {
     $scope.credentials = {};
-
+    $scope.loginFailure = false;
+    
     $scope.login = function(credentials) {
-      userService.loginUser(credentials).then(function(/*user*/) {
-        $location.path("/dashboard");
+      $scope.loginFailure = true;
+
+      var loginUser = userService.loginUser(credentials).then(function(user) {
+	      if(user === undefined) {
+	    	  $scope.loginFailure = true;
+	      } else {
+	        $location.path("/dashboard");
+	      }
       });
     };
   };
