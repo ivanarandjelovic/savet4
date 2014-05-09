@@ -8,8 +8,8 @@
 		</div>
 <form name="form">
 	<fieldset>
-		<div class="form-group">
-			<label for="email">E-mail adresa</label> <input type="email"
+		<div class="form-group" ng-class="{ 'has-error' : form.email.$invalid  && !form.email.$pristine }">
+			<label for="email">E-mail adresa</label> <input type="email" name="email"
 				class="form-control" ng-model="credentials.email"
 				placeholder="E-Mail" required autocomplete="on" /><br />
 		</div>

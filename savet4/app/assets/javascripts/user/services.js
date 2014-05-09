@@ -27,7 +27,6 @@ define([ "angular", "common" ], function(angular) {
 							});
 						}, function(response) {
 							// Login failure case!
-							alert("login failure!");
 							return undefined;
 						});
 					},
