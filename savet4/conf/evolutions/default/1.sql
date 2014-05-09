@@ -13,6 +13,18 @@ CREATE TABLE Users (
 
 insert into Users(email, password, description,role) values ('a@a.a','1','Bogotac','GOD');
 
+CREATE TABLE Saveti (
+    id bigint(20) NOT NULL AUTO_INCREMENT,
+    name varchar(255) NOT NULL,
+    address varchar(255) not null,
+    created_at DATETIME NOT NULL default CURRENT_TIMESTAMP(),
+    PRIMARY KEY (id)
+);
+
+insert into Saveti(name, address) values ('Savet 1','Testni savet br.1 na nekoj adresi');
+insert into Saveti(name, address) values ('Savet 2','Testni savet br.2 na nekoj drugoj adresi');
+insert into Saveti(name, address) values ('Savet 3','Testni savet br.3 opet na nekoj adresi');
+
 # --- !Downs
  
 DROP TABLE Users;

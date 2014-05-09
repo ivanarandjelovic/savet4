@@ -9,7 +9,7 @@ define(["angular"], function(angular) {
     $scope.loginFailure = false;
     
     $scope.login = function(credentials) {
-      $scope.loginFailure = true;
+      $scope.loginFailure = false;
 
       var loginUser = userService.loginUser(credentials).then(function(user) {
 	      if(user === undefined) {
