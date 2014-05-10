@@ -10,5 +10,5 @@ define(["angular", "home", "user", "dashboard", "saveti"], function(angular) {
 
   // We must already declare most dependencies here (except for common), or the submodules' routes
   // will not be resolved
-  return angular.module("app", ["savet4.home", "savet4.user", "savet4.dashboard","savet4.saveti"]);
+  return angular.module("app", ["ngResource", "savet4.home", "savet4.user", "savet4.dashboard","savet4.saveti"]);
 });

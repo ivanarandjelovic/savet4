@@ -1,4 +1,6 @@
 <div class="page-header">
   <h1>Kućni saveti</h1>
 </div>
-TODO: Lista kucnih saveta
+<div class="list-group">
+  <a href="" ng-click="open(savet.id)" class="list-group-item" ng-repeat="savet in saveti">{{savet.name +", " + savet.address}}</a>
+ </div>
