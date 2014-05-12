@@ -12,7 +12,7 @@ object Application extends Controller with Security {
   implicit val app: play.api.Application = play.api.Play.current
 
   lazy val CacheExpiration =
-    app.configuration.getInt("cache.expiration").getOrElse(60 /*seconds*/ * 2 /* minutes */ )
+    app.configuration.getInt("cache.expiration").getOrElse(60 /*seconds*/ * 30 /* minutes */ )
 
   val AuthTokenHeader = "X-XSRF-TOKEN"
   val AuthTokenCookieKey = "XSRF-TOKEN"
@@ -38,7 +38,8 @@ object Application extends Controller with Security {
         routes.javascript.Users.user,
         routes.javascript.Users.createUser,
         routes.javascript.Users.updateUser,
-        routes.javascript.Users.deleteUser // TODO Add your routes here
+        routes.javascript.Users.deleteUser, 
+        routes.javascript.Users.userForToken         // TODO Add your routes here
         )).as(JAVASCRIPT)
   }
 
@@ -53,11 +54,17 @@ object Application extends Controller with Security {
     request.body.validate[(String, String)].map {
       case (email, pass) => {
         val id = Users.login(email, pass)
+        println("Id from login="+id);
 
         // TODO IvanA: continue
         val token = java.util.UUID.randomUUID().toString
+        println("Token generated="+token);
 
         Cache.set(token, id, CacheExpiration)
+
+        println("Token set to cache with id="+id.toString);
+        
+        println("Asking for token from cache immediately:"+Cache.get(token).toString())
 
         Ok(Json.obj("token" -> token)).withCookies(Cookie(AuthTokenCookieKey, token, None, httpOnly = false))
 

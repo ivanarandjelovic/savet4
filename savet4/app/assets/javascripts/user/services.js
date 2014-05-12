@@ -19,10 +19,10 @@ define([ "angular", "common" ], function(angular) {
 							token = response.data.token;
 							// in a real app we could use the token to fetch the
 							// user data
-							return playRoutes.controllers.Users.user(3).get().then(function(response) {
+							return playRoutes.controllers.Users.userForToken(token).get().then(function(response) {
 								user = response.data; // Extract user data from
 								// user() request
-								user.email = credentials.email;
+								//user.email = credentials.email;
 								return user;
 							});
 						}, function(response) {

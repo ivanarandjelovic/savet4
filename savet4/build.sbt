@@ -16,6 +16,7 @@ libraryDependencies ++= Seq(
   ,jdbc      // The JDBC connection pool and the play.api.db API
   ,anorm     // Scala RDBMS Library
   ,cache     // Play API cache
+  ,"org.json4s" %% "json4s-native" % "3.2.9"
 )
 
 playScalaSettings
