@@ -1,0 +1,24 @@
+<div class="page-header">
+	<h1>Dodaj novi savet</h1>
+</div>
+		<div class="alert alert-warning alert-dismissable" ng-show="loginFailure">
+			<button type="button" class="close" data-dismiss="alert"
+				aria-hidden="true">&times;</button>
+			<strong>Upozorenje!</strong> TODO: ....
+		</div>
+<form name="form">
+	<fieldset>
+		<div class="form-group" ng-class="{ 'has-error' : form.name.$invalid  && !form.name.$pristine }">
+			<label for="name">Naziv saveta</label> <input type="text" name="name"
+				class="form-control" ng-model="savet.name"
+				placeholder="Naziv" required autocomplete="off" />
+		</div>
+		<div class="form-group" ng-class="{ 'has-error' : form.address.$invalid  && !form.address.$pristine }">
+			<label for="address">Adresa</label> <input type="text" name="address"
+				class="form-control" ng-model="savet.address"
+				placeholder="Adresa" required />
+		</div>
+		<button class="btn btn-primary" ng-disabled="form.$invalid"
+			ng-click="create(savet)">Dodaj savet</button>
+	</fieldset>
+</form>

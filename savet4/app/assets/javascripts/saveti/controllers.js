@@ -43,7 +43,7 @@ define(["angular"], function() {
   	
   	$scope.create = function (savet) {
   		var id = Savet.save(savet);
-  		alert("Saved savet id="+id);
+  		// TODO: get ID here?? alert("Saved savet id="+savet.id);
   		$location.path("/saveti");
   	}
   
