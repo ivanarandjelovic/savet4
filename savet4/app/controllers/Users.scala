@@ -12,6 +12,7 @@ import org.json4s.native.Serialization
 import org.json4s.native.Serialization.{ read, write }
 import play.api.cache._
 
+
 //import models.User
 
 /** Example controller; see conf/routes for the the mapping to routes */
@@ -35,7 +36,7 @@ object Users extends Controller with Security {
   /**
    * Check if the supplied username and pass are OK, return user ID or nil
    */
-  def login(email: String, password: String) : Option[Long]  = {
+  def login(email: String, password: String) : Long  = {
     DB.withConnection { implicit c =>
 
       val id: Option[Long] = SQL("Select id from Users where upper(email) = upper({email}) and password = {pass}")
@@ -47,7 +48,7 @@ object Users extends Controller with Security {
         throw new Exception();
       } else  {
         println("returning id="+id)
-        id
+        id.get
       }
     }
   }

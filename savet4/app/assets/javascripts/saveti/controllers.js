@@ -36,6 +36,16 @@ define(["angular"], function() {
     $scope.open = function(id) {
   		$location.path("/saveti/open/"+id);
   	}
+  	
+  	$scope.showCreate = function() {
+  		$location.path("/saveti/create");
+  	}
+  	
+  	$scope.create = function (savet) {
+  		var id = Savet.save(savet);
+  		alert("Saved savet id="+id);
+  		$location.path("/saveti");
+  	}
   
   };
   SavetiCtrl.$inject = ["$scope", "$location", "$routeParams", "$resource"];

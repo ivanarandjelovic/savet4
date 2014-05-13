@@ -25,7 +25,7 @@ GET     /userForToken/:token    controllers.Users.userForToken(token: String)
 # Saveti
 GET      /savet                  controllers.Saveti.list()
 #GET     /savet/:id              controllers.Saveti.get(id: Long)
-#POST    /savet                  controllers.Saveti.create()
+POST    /savet                  controllers.Saveti.create()
 #PUT     /savet/:id              controllers.Saveti.update(id: Long)
 #DELETE  /savet/:id              controllers.Saveti.delete(id: Long)
 
