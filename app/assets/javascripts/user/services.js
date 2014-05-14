@@ -47,9 +47,16 @@ define([ "angular", "common" ], function(angular) {
 
 					},
 					getUser : function() {
-						/*if (user) {*/
+						if (user) {
 							return user;
-							/*} else {
+						} else {
+							// Try to re-load the user from the server, maybe
+							// the page was re-freshed only:
+							// TODO: .. implement this
+						}					
+						/*if (user) {
+							return user;
+							} else {
 							playRoutes.controllers.Users.currentUser().get()
 									.then(function(response) {
 										user = response.data; // Extract user
