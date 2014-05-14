@@ -5,7 +5,7 @@ define(["angular"], function(angular) {
   "use strict";
 
   var LoginCtrl = function($scope, $location, userService) {
-    $scope.credentials = {};
+    $scope.credentials = { email : "a@a.a", password : "1"};
     $scope.loginFailure = false;
     
     $scope.login = function(credentials) {

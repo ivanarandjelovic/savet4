@@ -14,9 +14,6 @@ object Application extends Controller with Security {
   lazy val CacheExpiration =
     app.configuration.getInt("cache.expiration").getOrElse(60 /*seconds*/ * 30 /* minutes */ )
 
-  val AuthTokenHeader = "X-XSRF-TOKEN"
-  val AuthTokenCookieKey = "XSRF-TOKEN"
-
   implicit val rds = (
     (__ \ 'email).read[String] and (__ \ 'password).read[String]) tupled
 
