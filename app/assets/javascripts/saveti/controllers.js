@@ -42,8 +42,19 @@ define(["angular"], function() {
   	}
   	
   	$scope.create = function (savet) {
-  		var id = Savet.save(savet);
-  		// TODO: get ID here?? alert("Saved savet id="+savet.id);
+  		var savetNew = new Savet(savet);
+  		savetNew.$save(null, function (savedSavet) {
+  			// Here we have ID if needed
+  			//alert(savedSavet.id);
+  			
+  			// Do I need this to refresh the list?
+  	  		$scope.saveti = Savet.query();
+  	  		// NO, it's not working ..?
+  	  		
+  		});
+  		
+  		
+  		
   		$location.path("/saveti");
   	}
   
