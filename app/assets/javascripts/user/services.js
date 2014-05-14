@@ -14,31 +14,46 @@ define([ "angular", "common" ], function(angular) {
 				return {
 					loginUser : function(credentials) {
 						return playRoutes.controllers.Application.login().post(
-								credentials).then(function(response) {
-							// return promise so we can chain easily
-							token = response.data.token;
-							// in a real app we could use the token to fetch the
-							// user data
-							return playRoutes.controllers.Users.userForToken(token).get().then(function(response) {
-								user = response.data; // Extract user data from
-								// user() request
-								//user.email = credentials.email;
-								return user;
-							});
-						}, function(response) {
-							// Login failure case!
-							return undefined;
-						});
+								credentials).then(
+								function(response) {
+									// return promise so we can chain easily
+									token = response.data.token;
+									// in a real app we could use the token to
+									// fetch the
+									// user data
+									return playRoutes.controllers.Users
+											.userForToken(token).get().then(
+													function(response) {
+														user = response.data; // Extract
+																				// user
+																				// data
+																				// from
+														// user() request
+														// user.email =
+														// credentials.email;
+														return user;
+													});
+								}, function(response) {
+									// Login failure case!
+									return undefined;
+								});
 					},
 					logout : function() {
 						// Logout on server in a real app
-						return playRoutes.controllers.Application.logout().post().then(function(response) {
+						return playRoutes.controllers.Application.logout()
+								.post().then(function(response) {
 									user = undefined;
 								});
 
 					},
 					getUser : function() {
-						return user;
+						if (user) {
+							return user;
+						} else {
+							// Try to re-load the user from the server, maybe
+							// the page was re-freshed only:
+							// TODO: .. implement this
+						}
 					}
 				};
 			} ]);
