@@ -67,6 +67,21 @@ object Users extends Controller with Security {
     }
   }
 
+  
+  def currentUser() = HasToken(parse.empty) { token =>
+    userId => implicit request =>
+    
+    println("Token is: "+token)
+    val maybeId = Cache.get(token)
+    println("maybeId is: "+maybeId)
+    println("Id is: "+maybeId.getOrElse(throw new RuntimeException("No session for token:"+token)) )
+    
+    DB.withConnection { implicit c =>
+      val users = SQL("Select * from Users where id = {id}").on("id" -> maybeId).as(parseUser *)
+      Ok(write(users.head))
+    }
+  }
+  
   /** Retrieves the user for the given id as JSON */
   def user(id: Long) = Action(parse.empty) { request =>
     // TODO Find user and convert to JSON
