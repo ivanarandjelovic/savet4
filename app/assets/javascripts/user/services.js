@@ -25,8 +25,8 @@ define([ "angular", "common" ], function(angular) {
 											.userForToken(token).get().then(
 													function(response) {
 														user = response.data; // Extract
-																				// user
-																				// data
+														// user
+														// data
 														// from
 														// user() request
 														// user.email =
@@ -47,26 +47,17 @@ define([ "angular", "common" ], function(angular) {
 
 					},
 					getUser : function() {
-						if (user) {
-							return user;
-						} else {
-							// Try to re-load the user from the server, maybe
-							// the page was re-freshed only:
-							// TODO: .. implement this
-						}					
-						/*if (user) {
-							return user;
-							} else {
-							playRoutes.controllers.Users.currentUser().get()
-									.then(function(response) {
-										user = response.data; // Extract user
-																// data from
-										// user() request
-										// user.email = credentials.email;
-										//$scope.user = user;
-										return user;
-									});*/
-						}
+						return user;
+					},
+					refreshUser : function() {
+						var u = playRoutes.controllers.Users.currentUser().get().then(
+								function(response) {
+									user = response.data; // Extract user
+									// data from
+								});
+//						var deferred = $q.defer();
+//						deferred.resolve(u);
+//						alert(deferred.proimise	);
 					}
 				};
 			} ]);
