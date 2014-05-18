@@ -38,10 +38,6 @@ define(["angular"], (angular) ->
         
     connect()
     
-    
-        
-    
-    
   LiveCtrl.$inject = ["$scope", "playRoutes", "$timeout"]
   
   Shit = () ->
