@@ -3,12 +3,17 @@ define(["angular"], (angular) ->
     $scope.websocket = new WebSocket(playRoutes.controllers.Live.get().webSocketUrl())
     
     $scope.websocket.onmessage = (msg) ->
-      $scope.message = msg.data
-      console.log("received ws message: "+msg.data)
+      $scope.$apply () ->
+        $scope.message = msg.data
+        console.log("received ws message: "+msg.data)
       
     $scope.websocket.onclose = (event) ->
       $scope.message = "WS closed!"
       console.log("received ws closed event")
+      
+    $scope.websocket.onerror = (error) ->
+      $scope.message = "WS error!"
+      console.log("received ws error event: "+error)
       
     $scope.send = (msg) ->
       if $scope.websocket.readyState == 1

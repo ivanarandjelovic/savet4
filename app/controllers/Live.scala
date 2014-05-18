@@ -43,7 +43,9 @@ object Live extends Controller with Security {
         channel push ("RESPONSE: " + count)
         if(count % 5 == 0) {
           // after 5 messages break the connection
-          channel.end
+          //out >>> Enumerator.eof
+          channel.eofAndEnd
+          //channel push Enumerator.eof
           println("Ended channel after 5")
         }
     }
