@@ -6,9 +6,17 @@ define(["angular"], (angular) ->
       $scope.message = msg.data
       console.log("received ws message: "+msg.data)
       
+    $scope.websocket.onclose = (event) ->
+      $scope.message = "WS closed!"
+      console.log("received ws closed event")
+      
     $scope.send = (msg) ->
-      $scope.websocket.send(msg)
-      console.log("sending websocket message: "+msg)
+      if $scope.websocket.readyState == 1
+        $scope.websocket.send(msg)
+        console.log("sending websocket message: "+msg)
+      else
+        console.log("websocket not open, not sending!: "+msg)
+        
     
   LiveCtrl.$inject = ["$scope", "playRoutes"]
   

@@ -41,6 +41,11 @@ object Live extends Controller with Security {
         println("Got message: "+msg)
         count = count + 1
         channel push ("RESPONSE: " + count)
+        if(count % 5 == 0) {
+          // after 5 messages break the connection
+          channel.end
+          println("Ended channel after 5")
+        }
     }
     (in, out)
 
