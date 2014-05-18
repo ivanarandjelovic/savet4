@@ -30,6 +30,9 @@ POST    /savet                  controllers.Saveti.create()
 #PUT     /savet/:id              controllers.Saveti.update(id: Long)
 #DELETE  /savet/:id              controllers.Saveti.delete(id: Long)
 
+#Live feedback
+GET		/live/get				controllers.Live.get()
+
 # Static
 # ~~~~
 

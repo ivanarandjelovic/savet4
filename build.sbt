@@ -32,3 +32,5 @@ requireJsShim := "build.js"
 
 // To completely override the optimization process, use this config option:
 //requireNativePath := Some("node r.js -o name=main out=javascript-min/main.min.js")
+
+coffeescriptOptions := Seq("bare")
