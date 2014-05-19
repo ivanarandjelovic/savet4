@@ -18,7 +18,8 @@
         ng-cloak>
       <div class="container" ng-switch="!!user" ng-cloak>
         <a href="" ng-click="home()" class="navbar-brand">Savet4</a>
-        <a href="" ng-click="saveti()" class="navbar-brand">Saveti</a>
+        <a href="" ng-show="!!user" ng-click="saveti()" class="navbar-brand">Saveti</a>
+        <div class="navbar-text"> </div>
 	    <div ng-controller="LiveCtrl">
 	        	<a href="#" ng-click="send('1')" class="navbar-brand">Send ws <sub>(click me)</sub>: {{message}}</a>
 	    </div>
