@@ -32,6 +32,7 @@ POST    /savet                  controllers.Saveti.create()
 
 #Live feedback
 GET		/live/get				controllers.Live.get()
+GET		/live/getSecured		controllers.Live.getSecured()
 
 # Static
 # ~~~~
