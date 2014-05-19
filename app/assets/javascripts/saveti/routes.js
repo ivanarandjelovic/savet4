@@ -1,5 +1,5 @@
 /**
- * Dashboard routes.
+ * Saveti routes.
  */
 define(["angular", "./controllers", "common"], function(angular, controllers) {
   "use strict";
@@ -10,7 +10,6 @@ define(["angular", "./controllers", "common"], function(angular, controllers) {
       .when("/saveti/open/:id",  {templateUrl: "/assets/templates/saveti/open.html",  controller:controllers.SavetiCtrl/*, resolve:userResolve*/})
       .when("/saveti",  {templateUrl: "/assets/templates/saveti/saveti.html",  controller:controllers.SavetiCtrl/*, resolve:userResolve*/})
       .when("/saveti/create",  {templateUrl: "/assets/templates/saveti/create.html",  controller:controllers.SavetiCtrl/*, resolve:userResolve*/});
-      //.when("/admin/dashboard",  {templateUrl: "/assets/templates/dashboard/admin.html",  controller:controllers.AdminDashboardCtrl})
   }]);
   return mod;
 });
