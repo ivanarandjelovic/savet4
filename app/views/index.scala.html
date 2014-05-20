@@ -21,7 +21,7 @@
         <a href="" ng-show="!!user" ng-click="saveti()" class="navbar-brand">Saveti</a>
         <div class="navbar-text"> </div>
 	    <div ng-controller="LiveCtrl">
-	        	<a href="#" ng-click="send('1')" class="navbar-brand">Send ws <sub>(click me)</sub>: <span class="alert alert-{{ websocket.readyState == 1 ? 'info' : 'warning'}}">{{message}}</span></a>
+	        	<a href="" ng-click="send('1')" class="navbar-brand">Send ws <sub>(click me)</sub>: <span class="alert" ng-class="(websocket.readyState == 1 ? 'alert-info' : 'alert-warning')">{{message ? message : "initial"}}</span></a>
 	    </div>
         <div ng-switch-when="true">
           <ul class="nav navbar-nav navbar-right">
