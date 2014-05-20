@@ -10,7 +10,7 @@
 	<fieldset>
 		<div class="form-group" ng-class="{ 'has-error' : form.name.$invalid  && !form.name.$pristine }">
 			<label for="name">Naziv saveta</label> <input type="text" name="name"
-				class="form-control" ng-model="savet.name"
+				class="form-control" autofocus="autofocus" ng-model="savet.name"
 				placeholder="Naziv" required autocomplete="off" />
 		</div>
 		<div class="form-group" ng-class="{ 'has-error' : form.address.$invalid  && !form.address.$pristine }">

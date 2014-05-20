@@ -6,6 +6,7 @@ define(["angular"], function() {
 
   /**
    * user is not a service, but stems from userResolve (Check ../user/services.js) object used by dashboard.routes.
+   * "user" objekat je resultat " resolve:userResolve" is routes.js 
    */
   var DashboardCtrl = function($scope, user) {
     $scope.user = user;

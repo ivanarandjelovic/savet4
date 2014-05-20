@@ -1,62 +1,60 @@
 /**
  * Home controllers.
  */
-define(["angular"], function(angular) {
-			"use strict";
+define([ "angular" ], function(angular) {
+	"use strict";
 
-			/** Controls the index page */
-			var HomeCtrl = function($scope, $rootScope, $location, helper) {
-				//console.log(helper.sayHi());
-				$rootScope.pageTitle = "Welcome";
-			};
-			HomeCtrl.$inject = ["$scope", "$rootScope", "$location", "helper"];
+	/** Controls the index page */
+	var HomeCtrl = function($scope, $rootScope, $location, helper) {
+		// console.log(helper.sayHi());
+		$rootScope.pageTitle = "Welcome to Savet4 application";
+	};
+	HomeCtrl.$inject = [ "$scope", "$rootScope", "$location", "helper" ];
 
-			/** Controls the header */
-			var HeaderCtrl = function($scope, userService, helper, $location) {
-			
-			//Initially try to refresh the user if this is page refresh event:
-			var maybeUser = userService.refreshUser();
-			
-				
-			// Wrap the current user from the service in a watch expression
-			$scope.$watch(function() {
-							var user = userService.getUser();
-							return user;
-						}, function(user) {
-							$scope.user = user;
-						}, true);
+	/** Controls the header */
+	var HeaderCtrl = function($scope, userService, helper, $location) {
 
-				$scope.logout = function() {
-					userService.logout();
-					$scope.user = undefined;
-					$location.path("/");
-				};
+		// Initially try to refresh the user if this is page refresh event:
+		userService.refreshUser();
 
-				$scope.home = function() {
-					if ($scope.user === undefined) {
-						$location.path("/");
-					} else {
-						$location.path("/dashboard");
-					}
-				};
+		// Wrap the current user from the service in a watch expression
+		$scope.$watch(function() {
+			var user = userService.getUser();
+			return user;
+		}, function(user) {
+			$scope.user = user;
+		}, true);
 
-				$scope.saveti = function() {
-					$location.path("/saveti");
-				};
+		$scope.logout = function() {
+			userService.logout();
+			$scope.user = undefined;
+			$location.path("/");
+		};
 
-			};
-			HeaderCtrl.$inject = ["$scope", "userService", "helper",
-					"$location"];
+		$scope.home = function() {
+			if ($scope.user === undefined) {
+				$location.path("/");
+			} else {
+				$location.path("/dashboard");
+			}
+		};
 
-			/** Controls the footer */
-			var FooterCtrl = function(/* $scope */) {
-			};
-			// FooterCtrl.$inject = ["$scope"];
+		$scope.saveti = function() {
+			$location.path("/saveti");
+		};
 
-			return {
-				HeaderCtrl : HeaderCtrl,
-				FooterCtrl : FooterCtrl,
-				HomeCtrl : HomeCtrl
-			};
+	};
+	HeaderCtrl.$inject = [ "$scope", "userService", "helper", "$location" ];
 
-		});
+	/** Controls the footer */
+	var FooterCtrl = function(/* $scope */) {
+	};
+	// FooterCtrl.$inject = ["$scope"];
+
+	return {
+		HeaderCtrl : HeaderCtrl,
+		FooterCtrl : FooterCtrl,
+		HomeCtrl : HomeCtrl
+	};
+
+});
