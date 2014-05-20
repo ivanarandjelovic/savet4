@@ -1,3 +1,7 @@
+###
+Websocket's related module
+###
+
 define(["angular", "./controllers"], (angular, controllers) ->
   "use strict"
 
