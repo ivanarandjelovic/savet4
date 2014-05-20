@@ -53,6 +53,7 @@ define([ "angular", "common" ], function(angular) {
 						var u = playRoutes.controllers.Users.currentUser().get().then(
 								function(response) {
 									user = response.data; // Extract user
+									return user;
 									// data from
 								});
 //						var deferred = $q.defer();
