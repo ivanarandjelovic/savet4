@@ -3,7 +3,7 @@ define(["angular"], (angular) ->
     timeoutSeconds = 5
     
     connect = () ->
-      if not userService.getUser()
+      if not $scope.user
         console.log("WS: no user, closing socket if any and returning")
         $scope.websocket?.close?()
         return
@@ -27,7 +27,7 @@ define(["angular"], (angular) ->
         $scope.$apply () ->
           $scope.message = "WS closed!"
         console.log("received ws closed event")
-        if not userService.getUser()
+        if not $scope.user
           console.log("No re-connect scheduled, no user!")
         else
           console.log("Scheduling re-connect in #{timeoutSeconds} seconds ...")
@@ -49,9 +49,9 @@ define(["angular"], (angular) ->
         
     connect()
     
+    #Watch for user change (login or logout)
     $scope.$watch( ->
-      user = userService.getUser()
-      return user
+      $scope.user 
     , -> connect() )
     
   LiveCtrl.$inject = ["$scope", "playRoutes", "$timeout", "userService"]
