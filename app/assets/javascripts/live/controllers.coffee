@@ -50,9 +50,7 @@ define(["angular"], (angular) ->
     connect()
     
     #Watch for user change (login or logout)
-    $scope.$watch( ->
-      $scope.user 
-    , -> connect() )
+    $scope.$watch( ( -> $scope.user ) , ( -> connect() ) )
     
   LiveCtrl.$inject = ["$scope", "playRoutes", "$timeout", "userService"]
   
