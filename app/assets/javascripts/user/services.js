@@ -1,11 +1,11 @@
 /**
  * User service, exposes user model to the rest of the app.
  */
-define([ "angular", "./controllers", "ui-bootstrap", "common" ], function(angular, controllers) {
+define([ "angular", "./controllers", "ui-bootstrap", "common", "security" ], function(angular, controllers) {
 	"use strict";
 
 	var mod = angular.module("user.services",
-			[ "savet4.common", "ui.bootstrap" ]);
+			[ "savet4.common", "ui.bootstrap", "security.retryQueue" ]);
 	mod.factory("userService", [
 			"$http",
 			"$q",
@@ -52,7 +52,7 @@ define([ "angular", "./controllers", "ui-bootstrap", "common" ], function(angula
 					},
 					refreshUser : function() {
 						var u = playRoutes.controllers.Users.currentUser()
-								.get().then(function(response) {
+								.get( {doNotRetry : true} ).then(function(response) {
 									user = response.data; // Extract user
 									return user;
 									// data from
@@ -78,24 +78,41 @@ define([ "angular", "./controllers", "ui-bootstrap", "common" ], function(angula
 		} ]
 	});
 
-	mod.factory("securityService", [ "$http", "$q", "playRoutes", "$modal", "$log",
-			function($http, $q, playRoutes, $modal, $log) {
-				return {
+	mod.factory("securityService", [ "$http", "$q", "playRoutes", "$modal", "$log", "securityRetryQueue", 
+			function($http, $q, playRoutes, $modal, $log, queue	) {
+				
+				var modalLogin = null;
+				
+				// Register a handler for when an item is added to the retry queue
+				  queue.onItemAddedCallbacks.push(function(retryItem) {
+				    if ( queue.hasMore() ) {
+				      service.showLogin();
+				    }
+				  });
+				  
+				var service = {
+					
 					showLogin : function() {
 
-							var modalLogin = $modal.open({
+							    modalLogin = $modal.open({
 								templateUrl : '/assets/templates/user/modalLogin.html',
 								controller : controllers.ModalLoginCtrl,
-								size : "lg"
+								size : "sm"
 							});
 
 							modalLogin.result.then(function(user) {
 								$log.info('Login done for : ' + user);
+								queue.retryAll();
 							}, function() {
-								$log.info('Modal dismissed at: ' + new Date());
+								$log.info('Login canceled: ' + new Date());
+								queue.cancelAll();
 							});
 						}
-				};
+				
+					  
+				}
+				
+				return service;
 			} ]);
 
 	/**
