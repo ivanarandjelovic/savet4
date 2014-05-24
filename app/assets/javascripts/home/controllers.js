@@ -12,7 +12,7 @@ define([ "angular" ], function(angular) {
 	HomeCtrl.$inject = [ "$scope", "$rootScope", "$location", "helper" ];
 
 	/** Controls the header */
-	var HeaderCtrl = function($scope, userService, helper, $location) {
+	var HeaderCtrl = function($scope, userService, helper, $location, securityService) {
 
 		// Initially try to refresh the user if this is page refresh event:
 		userService.refreshUser();
@@ -42,9 +42,13 @@ define([ "angular" ], function(angular) {
 		$scope.saveti = function() {
 			$location.path("/saveti");
 		};
+		
+		$scope.login = function() {
+			securityService.showLogin();
+		}
 
 	};
-	HeaderCtrl.$inject = [ "$scope", "userService", "helper", "$location" ];
+	HeaderCtrl.$inject = [ "$scope", "userService", "helper", "$location", "securityService" ];
 
 	/** Controls the footer */
 	var FooterCtrl = function(/* $scope */) {

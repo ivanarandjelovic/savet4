@@ -1,10 +1,11 @@
 /**
  * User service, exposes user model to the rest of the app.
  */
-define([ "angular", "common" ], function(angular) {
+define([ "angular", "./controllers", "ui-bootstrap-tpls-0.11.0", "common" ], function(angular, controllers) {
 	"use strict";
 
-	var mod = angular.module("user.services", [ "savet4.common" ]);
+	var mod = angular.module("user.services",
+			[ "savet4.common", "ui.bootstrap" ]);
 	mod.factory("userService", [
 			"$http",
 			"$q",
@@ -50,15 +51,12 @@ define([ "angular", "common" ], function(angular) {
 						return user;
 					},
 					refreshUser : function() {
-						var u = playRoutes.controllers.Users.currentUser().get().then(
-								function(response) {
+						var u = playRoutes.controllers.Users.currentUser()
+								.get().then(function(response) {
 									user = response.data; // Extract user
 									return user;
 									// data from
 								});
-//						var deferred = $q.defer();
-//						deferred.resolve(u);
-//						alert(deferred.proimise	);
 					}
 				};
 			} ]);
@@ -79,6 +77,27 @@ define([ "angular", "common" ], function(angular) {
 			return deferred.promise;
 		} ]
 	});
+
+	mod.factory("securityService", [ "$http", "$q", "playRoutes", "$modal", "$log",
+			function($http, $q, playRoutes, $modal, $log) {
+				return {
+					showLogin : function() {
+
+							var modalLogin = $modal.open({
+								templateUrl : '/assets/templates/user/modalLogin.html',
+								controller : controllers.ModalLoginCtrl,
+								size : "lg"
+							});
+
+							modalLogin.result.then(function(user) {
+								$log.info('Login done for : ' + user);
+							}, function() {
+								$log.info('Modal dismissed at: ' + new Date());
+							});
+						}
+				};
+			} ]);
+
 	/**
 	 * If the current route does not resolve, go back to the start page.
 	 */
