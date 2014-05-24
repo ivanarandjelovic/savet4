@@ -22,7 +22,7 @@
   };
 
   // Load the app. This is kept minimal so it doesn't need much updating.
-  require(["angular", "angular-cookies", "angular-route", "angular-resource", "jquery", "bootstrap", "./app", "./ui-bootstrap-tpls-0.11.0"],
+  require(["angular", "angular-cookies", "angular-route", "angular-resource", "jquery", "bootstrap", "ui-bootstrap", "ui-bootstrap-tpls", "./app"/*, "./ui-bootstrap-tpls-0.11.0"*/],
     function(angular) {
       angular.bootstrap(document, ["app"]);
     }

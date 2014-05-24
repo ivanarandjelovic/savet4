@@ -1,7 +1,7 @@
 /**
  * User service, exposes user model to the rest of the app.
  */
-define([ "angular", "./controllers", "ui-bootstrap-tpls-0.11.0", "common" ], function(angular, controllers) {
+define([ "angular", "./controllers", "ui-bootstrap", "common" ], function(angular, controllers) {
 	"use strict";
 
 	var mod = angular.module("user.services",

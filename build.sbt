@@ -13,6 +13,7 @@ libraryDependencies ++= Seq(
   ,"org.webjars" % "jquery" % "1.11.0-1"
   ,"org.webjars" % "bootstrap" % "3.1.1" exclude("org.webjars", "jquery")
   ,"org.webjars" % "angularjs" % "1.2.14" exclude("org.webjars", "jquery")
+  ,"org.webjars" % "angular-ui-bootstrap" % "0.11.0-2"
   ,jdbc      // The JDBC connection pool and the play.api.db API
   ,anorm     // Scala RDBMS Library
   ,cache     // Play API cache
