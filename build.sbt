@@ -18,6 +18,7 @@ libraryDependencies ++= Seq(
   ,anorm     // Scala RDBMS Library
   ,cache     // Play API cache
   ,"org.json4s" %% "json4s-native" % "3.2.9"
+  ,"com.typesafe.slick" %% "slick" % "2.0.0"
 )
 
 playScalaSettings

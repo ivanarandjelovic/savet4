@@ -20,6 +20,7 @@ import org.json4s._
 import org.json4s.native.Serialization
 import org.json4s.native.Serialization.{ read, write }
 
+
 /**
  * @author aivan
  *
@@ -45,6 +46,8 @@ object Saveti extends Controller with Security {
     userId => implicit request =>
       //List all saveti
 
+      //Stanari.test()
+      
       DB.withConnection { implicit c =>
 
         val saveti = SQL("Select * from Saveti").as(parseSavet *)
