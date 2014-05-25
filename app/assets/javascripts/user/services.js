@@ -1,11 +1,11 @@
 /**
  * User service, exposes user model to the rest of the app.
  */
-define([ "angular", "./controllers", "ui-bootstrap", "common", "security" ], function(angular, controllers) {
+define([ "angular", "./controllers", "ui-bootstrap", "ui-bootstrap-tpls", "common", "security" ], function(angular, controllers) {
 	"use strict";
 
 	var mod = angular.module("user.services",
-			[ "savet4.common", "ui.bootstrap", "security.retryQueue" ]);
+			[ "savet4.common", "ui.bootstrap", "ui.bootstrap.tpls", "security.retryQueue" ]);
 	mod.factory("userService", [
 			"$http",
 			"$q",
