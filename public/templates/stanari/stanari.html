@@ -1,0 +1,7 @@
+<div class="page-header">
+  <h1>Stanari kućnog saveta: {{savet.name}}</h1>
+</div>
+<button class="btn btn-primary" ng-click="showCreate()">Dodaj novog stanara</button>
+<div class="list-group">
+  <a href="" ng-click="open(stanar.id)" class="list-group-item" ng-repeat="stanar in stanari">{{stanar.name +" " + stanar.lastName}}</a>
+ </div>

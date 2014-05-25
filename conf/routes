@@ -24,14 +24,17 @@ GET     /userForToken/:token    controllers.Users.userForToken(token: String)
 GET     /currentUser            controllers.Users.currentUser()
 
 # Saveti
-GET      /savet                  controllers.Saveti.list()
-#GET     /savet/:id              controllers.Saveti.get(id: Long)
+GET      /savet                 controllers.Saveti.list()
+#GET     /savet/:id             controllers.Saveti.get(id: Long)
 POST    /savet                  controllers.Saveti.create()
-#PUT     /savet/:id              controllers.Saveti.update(id: Long)
-#DELETE  /savet/:id              controllers.Saveti.delete(id: Long)
+#PUT     /savet/:id             controllers.Saveti.update(id: Long)
+#DELETE  /savet/:id             controllers.Saveti.delete(id: Long)
+
+#Stanari
+GET     /stanari/:savetId       controllers.Stanari.list(savetId: Long)
 
 #Live feedback
-GET		/live/get				controllers.Live.get()
+GET		/live/get			 	controllers.Live.get()
 GET		/live/getSecured		controllers.Live.getSecured()
 
 # Static

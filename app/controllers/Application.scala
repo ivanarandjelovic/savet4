@@ -38,6 +38,7 @@ object Application extends Controller with Security {
         routes.javascript.Users.deleteUser, 
         routes.javascript.Users.userForToken,
         routes.javascript.Users.currentUser,
+        routes.javascript.Stanari.list,
         routes.javascript.Live.get,
         routes.javascript.Live.getSecured          // TODO Add your routes here
         )).as(JAVASCRIPT)
