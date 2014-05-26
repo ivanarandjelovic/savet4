@@ -62,6 +62,17 @@ object Saveti extends Controller with Security {
       }
 
   }
+  
+   def getOne(id: Long) = HasToken() { token =>
+    userId => implicit request =>
+      DB.withConnection { implicit c =>
+
+        val saveti = SQL("Select * from Saveti where id={id}").on('id -> id).as(parseSavet *)
+
+        Ok(write(saveti.head))
+      }
+
+  }
 
   def create = HasToken(parse.json) { token =>
     userId => implicit request =>

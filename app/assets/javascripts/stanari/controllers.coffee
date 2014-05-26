@@ -11,14 +11,14 @@ define(["angular"], () ->
     Stanari = $resource("/stanari/:savetId", {savetId : "@savetId"})
 
     savetId = $routeParams.savetId
-  	$scope.savet = Savet.get( {id :savetId} )
+    $scope.savet = Savet.get({id:savetId})
 
-    stanari = Stanari.query( {savetId : $routeParams.savetId})
+    $scope.stanari = Stanari.query( {savetId : $routeParams.savetId})
 
 
   StanariCtrl.$inject = ["$scope", "$location", "$routeParams", "$resource"]
   
   {
-    StanariCtrl: SavetiCtrl
+    StanariCtrl: StanariCtrl
   }
 )

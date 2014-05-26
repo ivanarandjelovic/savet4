@@ -25,7 +25,7 @@ GET     /currentUser            controllers.Users.currentUser()
 
 # Saveti
 GET      /savet                 controllers.Saveti.list()
-#GET     /savet/:id             controllers.Saveti.get(id: Long)
+GET     /savet/:id              controllers.Saveti.getOne(id: Long)
 POST    /savet                  controllers.Saveti.create()
 #PUT     /savet/:id             controllers.Saveti.update(id: Long)
 #DELETE  /savet/:id             controllers.Saveti.delete(id: Long)

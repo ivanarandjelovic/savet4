@@ -17,7 +17,7 @@ define(["angular"], () ->
     	$scope.saveti = Savet.query()
 
     $scope.open = (id) ->
-      $location.path("/saveti/open/"+id)
+      $location.path("/stanari/"+id)
 
     $scope.showCreate = () ->
       $location.path("/saveti/create")
@@ -27,7 +27,7 @@ define(["angular"], () ->
       savetNew.$save(null, (savedSavet) ->
         $scope.saveti = Savet.query()
         $location.path("/saveti")
-      );
+      )
 
   SavetiCtrl.$inject = ["$scope", "$location", "$routeParams", "$resource"]
   

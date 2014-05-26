@@ -47,10 +47,20 @@ object Stanari extends Controller with Security {
     userId => implicit request =>
       //List all stanari for givven savetId
 
+      println("Entering list stanari")
+      
       db.withSession { implicit session: Session =>
         val stanari = TableQuery[Stanari]
 
-        val result = stanari.filter(_.savetId == savetId).list
+        println(stanari.filter(_.savetId === savetId).selectStatement)
+        val result = stanari.filter(_.savetId === savetId).list
+//val result = stanari.list
+        
+        println(result +" for savetId="+savetId)
+        
+        result foreach println
+
+        println("Done liist stanari")
 
         Ok(write(result))
       }
